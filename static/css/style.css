@@ -1,0 +1,193 @@
+/* ===========================
+   URL Shield Design System
+=========================== */
+
+:root{
+
+    /* Colors */
+
+    --background: #0A0A0A;
+    --surface: #161616;
+    --surface-light: #1F1F1F;
+
+    --border: #2B2B2B;
+
+    --primary: #FFD60A;
+    --primary-hover: #FFB300;
+
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --success: #22C55E;
+
+    --text: #FFFFFF;
+    --text-secondary: #BDBDBD;
+
+}
+
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    font-family: "Inter", sans-serif;
+
+    background-color: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    position: relative;
+
+}
+
+/* ===========================
+   Background Glow
+=========================== */
+
+body::before{
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+
+        radial-gradient(circle at top,
+        rgba(255,214,10,.12),
+        transparent 45%);
+
+    pointer-events: none;
+
+    z-index: -2;
+
+}
+
+/* ===========================
+   Grid Pattern
+=========================== */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+    background-size:40px 40px;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+input{
+
+    transition:.3s;
+
+}
+
+input:focus{
+
+    transform:scale(1.01);
+
+}
+
+button{
+
+    transition:.3s ease;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 0 25px rgba(255,214,10,.35);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}   
+
+.logo{
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+
+/* Nice selection color */
+
+::selection{
+
+    background: var(--primary);
+
+    color:black;
+
+}
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}

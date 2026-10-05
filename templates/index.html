@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>URL Shield</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6">
+    <div class="w-full max-w-3xl">
+      <!-- Logo + Heading -->
+
+      <div class="text-center">
+        <div
+          class="logo inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-yellow-400 text-black text-3xl sm:text-4xl font-bold shadow-lg"
+        >
+          🛡
+        </div>
+
+        <h1
+          class="mt-6 sm:mt-8 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-wide"
+        >
+          URL SHIELD
+        </h1>
+
+        <p class="mt-3 sm:mt-4 text-lg sm:text-xl text-zinc-400">
+          Instant Website Reputation Checker
+        </p>
+
+        <p
+          class="mt-5 sm:mt-6 text-sm sm:text-base text-zinc-500 max-w-xl mx-auto leading-7 sm:leading-8"
+        >
+          Analyze any website using VirusTotal and quickly identify whether it
+          is safe, suspicious, or potentially malicious before visiting.
+        </p>
+      </div>
+
+      <!-- URL Form -->
+
+      <form id="scanForm" action="/scan" method="POST" class="mt-8 sm:mt-12">
+        <div
+          class="bg-[#161616] border border-[#2b2b2b] rounded-2xl p-3 flex flex-col sm:flex-row gap-3"
+        >
+          <input
+            type="text"
+            name="url"
+            placeholder="https://example.com"
+            required
+            class="flex-1 bg-transparent outline-none px-4 py-3 text-base sm:text-lg text-white placeholder:text-zinc-600"
+          />
+
+          <button
+            id="scanButton"
+            type="submit"
+            class="bg-[#FFD60A] hover:bg-[#FFB300] text-black font-bold px-8 py-3 rounded-xl transition duration-300 w-full sm:w-auto"
+          >
+            <span id="buttonText"> Check Website </span>
+
+            <span
+              id="loadingSpinner"
+              class="hidden ml-3 inline-block w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"
+            >
+            </span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Features -->
+
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 mt-10 sm:mt-12 text-zinc-500 text-sm"
+      >
+        <div>⚡ Fast Analysis</div>
+
+        <div>🛡 Trusted API</div>
+
+        <div>🔒 Secure</div>
+      </div>
+
+      <p class="text-center text-zinc-600 mt-8 sm:mt-10 text-sm">
+        Powered by VirusTotal
+      </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

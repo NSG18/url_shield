@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Scan Result | URL Shield</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <!-- Header -->
+
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-10"
+      >
+        <a href="/" class="text-zinc-400 hover:text-[#FFD60A] transition">
+          ← Scan Another
+        </a>
+
+        <h1 class="text-xl font-bold tracking-wider">
+          URL <span class="text-[#FFD60A]">SHIELD</span>
+        </h1>
+      </div>
+
+      {% if result.success %}
+
+      <!-- Main Result Card -->
+
+      <div
+        class="bg-[#161616] border border-[#2B2B2B] rounded-3xl p-6 sm:p-10 text-center"
+      >
+        <!-- Status -->
+
+        <div
+          class="inline-flex items-center gap-2 bg-[#FFD60A]/10 border border-[#FFD60A]/40 text-[#FFD60A] px-4 sm:px-6 py-2 rounded-full font-semibold"
+        >
+          {% if result.status == "SAFE" %} ✓ SAFE {% elif result.status ==
+          "SUSPICIOUS" %} ⚠ SUSPICIOUS {% else %} ⚠ DANGEROUS {% endif %}
+        </div>
+
+        <!-- Score -->
+
+        <div class="mt-8">
+          <p class="text-zinc-400 text-lg">Trust Score</p>
+
+          <h2
+            class="text-4xl sm:text-5xl sm:text-7xl font-extrabold text-[#FFD60A] mt-3"
+          >
+            {{ result.score }}
+
+            <span class="text-3xl text-zinc-500"> /100 </span>
+          </h2>
+        </div>
+      </div>
+
+      <!-- URL -->
+
+      <div
+        class="mt-6 sm:mt-8 bg-[#161616] border border-[#2B2B2B] rounded-2xl p-5 sm:p-6"
+      >
+        <p class="text-[#FFD60A] text-sm font-semibold mb-3">CHECKED URL</p>
+
+        <p class="text-white text-lg break-all">{{ url }}</p>
+      </div>
+
+      <!-- Statistics -->
+
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+        <div
+          class="bg-[#161616] border border-[#2B2B2B] rounded-2xl p-6 text-center hover:border-[#FFD60A] transition"
+        >
+          <p class="text-zinc-400">Malicious</p>
+
+          <p class="text-4xl sm:text-5xl font-bold text-white mt-3">
+            {{ result.malicious }}
+          </p>
+        </div>
+
+        <div
+          class="bg-[#161616] border border-[#2B2B2B] rounded-2xl p-6 text-center hover:border-[#FFD60A] transition"
+        >
+          <p class="text-zinc-400">Suspicious</p>
+
+          <p class="text-4xl sm:text-5xl font-bold text-white mt-3">
+            {{ result.suspicious }}
+          </p>
+        </div>
+
+        <div
+          class="bg-[#161616] border border-[#2B2B2B] rounded-2xl p-6 text-center hover:border-[#FFD60A] transition"
+        >
+          <p class="text-zinc-400">Harmless</p>
+
+          <p class="text-4xl sm:text-5xl font-bold text-white mt-3">
+            {{ result.harmless }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Vendors -->
+
+      <div class="mt-8 bg-[#161616] border border-[#2B2B2B] rounded-2xl p-6">
+        <h3 class="text-xl font-semibold mb-5">Security Vendors</h3>
+
+        {% if result.vendors %}
+
+        <div class="space-y-3">
+          {% for vendor in result.vendors %}
+
+          <div
+            class="flex flex-col sm:flex-row sm:justify-between gap-2 bg-[#1F1F1F] rounded-xl px-5 py-4"
+          >
+            <span class="text-white"> {{ vendor.engine }} </span>
+
+            <span class="text-red-400 text-sm"> {{ vendor.result }} </span>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="text-[#FFD60A]">
+          ✓ No security vendors flagged this website.
+        </div>
+
+        {% endif %}
+      </div>
+
+      <!-- Action Button -->
+
+      <div class="text-center mt-10">
+        <a
+          href="/"
+          class="inline-block w-full sm:w-auto bg-[#FFD60A] hover:bg-[#FFB300] text-black font-bold px-10 py-4 rounded-xl transition duration-300"
+        >
+          Scan Another Website
+        </a>
+      </div>
+
+      {% else %}
+
+      <!-- Error -->
+
+      <div
+        class="bg-[#161616] border border-red-500/30 rounded-2xl p-8 text-center"
+      >
+        <h2 class="text-3xl font-bold text-red-400">Scan Failed</h2>
+
+        <p class="mt-4 text-zinc-400">{{ result.message }}</p>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
